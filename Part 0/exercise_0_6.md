@@ -11,4 +11,6 @@ sequenceDiagram
   Note right of browser: Payload: {content, date}
   server-->>browser: HTTP 201 Created
   deactivate server
+
+  Note over browser: Updates the UI locally
 ```

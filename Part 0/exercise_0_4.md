@@ -3,36 +3,34 @@ sequenceDiagram
     participant browser
     participant server
 
-    Note over browser: User writes note and clicks "Save"
+    Note over browser: User clicks "Save"
 
-    browser->>server: POST [https://studies.cs.helsinki.fi/exampleapp/new_note](https://studies.cs.helsinki.fi/exampleapp/new_note)
+    browser->>server: POST https://studies.cs.helsinki.fi/exampleapp/new_note
     activate server
-    Note right of browser: The payload contains the new note
-
-    server-->>browser: HTTP 302 Redirect (to /notes)
+    server-->>browser: 302 Redirect
     deactivate server
 
-    Note over browser: Browser reloads the /notes page
-
-    browser->>server: GET [https://studies.cs.helsinki.fi/exampleapp/notes](https://studies.cs.helsinki.fi/exampleapp/notes)
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/notes
     activate server
     server-->>browser: HTML document
     deactivate server
 
-    browser->>server: GET [https://studies.cs.helsinki.fi/exampleapp/main.css](https://studies.cs.helsinki.fi/exampleapp/main.css)
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/main.css
     activate server
-    server-->>browser: the css file
+    server-->>browser: main.css
     deactivate server
 
-    browser->>server: GET [https://studies.cs.helsinki.fi/exampleapp/main.js](https://studies.cs.helsinki.fi/exampleapp/main.js)
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/main.js
     activate server
-    server-->>browser: the JavaScript file
+    server-->>browser: main.js
     deactivate server
 
-    browser->>server: GET [https://studies.cs.helsinki.fi/exampleapp/data.json](https://studies.cs.helsinki.fi/exampleapp/data.json)
+    Note over browser: The browser starts executing the JavaScript code
+
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/data.json
     activate server
-    server-->>browser: [{ "content": "New note content", "date": "..." }, ... ]
+    server-->>browser: [{ "content": "...", "date": "..." }, ... ]
     deactivate server
 
-    Note right of browser: The browser renders the updated list of notes
+    Note over browser: The browser executes the callback function that renders the notes
 ```
